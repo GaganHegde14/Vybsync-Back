@@ -9,6 +9,7 @@ const {
   updateProfile,
   getUserProfile,
 } = require("../controllers/userControllers");
+const generateToken = require("../utils/generateToken"); // Ensure it's imported
 
 const router = express.Router();
 
@@ -30,9 +31,13 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   (req, res) => {
-    // Successful authentication, redirect to Chathome with token
+    if (!req.user) {
+      return res.redirect("https://vybsync.vercel.app/login");
+    }
+
     const token = generateToken(req.user._id);
-    res.redirect(`http://localhost:5173/Chathome?token=${token}`);
+    const redirectURL = `https://vybsync.vercel.app/Chathome?token=${token}`;
+    res.redirect(redirectURL);
   }
 );
 
