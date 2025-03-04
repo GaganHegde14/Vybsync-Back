@@ -11,7 +11,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://vybsync-frontend.vercel.app",
+    origin: "https://vybsync.vercel.app",
     credentials: true,
   },
 });
@@ -38,9 +38,7 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 connectDB();
 
 app.use(express.json());
-app.use(
-  cors({ origin: "https://vybsync-frontend.vercel.app", credentials: true })
-);
+app.use(cors({ origin: "https://vybsync.vercel.app", credentials: true }));
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
