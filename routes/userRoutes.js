@@ -9,7 +9,7 @@ const {
   updateProfile,
   getUserProfile,
 } = require("../controllers/userControllers");
-const generateToken = require("../utils/generateToken"); // Ensure it's imported
+const generateToken = require("../config/generateToken"); // Ensure it's imported
 
 const router = express.Router();
 
